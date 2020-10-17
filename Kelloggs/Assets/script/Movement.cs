@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Media;
+//using System.Numerics;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
@@ -24,6 +24,13 @@ public class Movement : MonoBehaviour
 
         verticalInput = Input.GetAxis("Vertical");
 
-        player.transform.Translate(new Vector2(horizontalInput, verticalInput) * moveSpeed * Time.deltaTime);
+        Vector3 movement = new Vector3(horizontalInput, verticalInput, 0) * moveSpeed * Time.deltaTime;
+
+      //  player.transform.LookAt(player.transform.position + movement);
+
+        player.transform.rotation = Quaternion.AngleAxis(movement.x < 0 ? -Vector2.Angle(movement, Vector2.up) : Vector2.Angle(movement, Vector2.up), Vector3.back);
+        player.GetComponent<Rigidbody>().velocity  = movement;
+
+        
     }
 }
