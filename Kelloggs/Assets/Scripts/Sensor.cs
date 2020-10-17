@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class Sensor : MonoBehaviour
 {
+    public AnimationCurve transparency;
     public List<GameObject> lostItems;
-    public Text itemSensor;
+    public SpriteRenderer itemSensor;
     public float renderDistance;
     private int currentIndex;
     // Start is called before the first frame update
@@ -27,7 +28,8 @@ public class Sensor : MonoBehaviour
 
             float percent = 1 - Mathf.Min(currentDistance, renderDistance) / renderDistance;
 
-            Text.defaultGraphicMaterial.color = new Color(1, 1, 1, Mathf.Sin(percent * Mathf.PI / 4f) * 2f);
+            itemSensor.color = new Color(1f, 1f, 1f, transparency.Evaluate(percent));
+            //itemSensor.color.
         }
     }
 }
