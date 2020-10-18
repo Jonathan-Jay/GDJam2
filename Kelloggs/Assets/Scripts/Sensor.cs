@@ -7,11 +7,13 @@ using UnityEngine.SceneManagement;
 public class Sensor : MonoBehaviour
 {
     public AnimationCurve transparency;
+    public AnimationCurve shake;
     public List<GameObject> lostItems;
     public SpriteRenderer itemSensor;
     public GameObject timerText;
     public float renderDistance = 100;
     public float timeLimit = 60;
+    public float shakeAngle = 30;
 
     private int currentIndex;
     private float time;
@@ -29,6 +31,7 @@ public class Sensor : MonoBehaviour
         if (lostItems.Count == 0)
         {
             name = "Winner is you";
+            Application.Quit();
         }
         else {
             if (time < timeLimit) {
@@ -38,7 +41,6 @@ public class Sensor : MonoBehaviour
                     SceneManager.LoadScene("Prototype");
                 }
             }
-            float timePercent = time / timeLimit;
 
             float currentDistance = (lostItems[currentIndex].transform.position - transform.position).magnitude;
             float percent = 1 - Mathf.Min(currentDistance, renderDistance) / renderDistance;
@@ -48,8 +50,8 @@ public class Sensor : MonoBehaviour
             itemSensor.color = new Color(tempCol.x, tempCol.y, tempCol.z, transparency.Evaluate(percent));
             //itemSensor.color.
 
-            itemSensor.transform.position = transform.position + Vector3.up * 5f;
-            itemSensor.transform.rotation = Quaternion.AngleAxis(Random.Range(-1f, 1f) * timePercent * 45f, Vector3.back);
+            itemSensor.transform.position = transform.position + Vector3.up * 3f;
+            itemSensor.transform.rotation = Quaternion.Euler(0, 0, Random.Range(-10f, 10f) / 10f * shake.Evaluate(percent) * shakeAngle);
             timerText.GetComponent<Text>().text = "Timer: " + (timeLimit - (int)time);
         }
     }

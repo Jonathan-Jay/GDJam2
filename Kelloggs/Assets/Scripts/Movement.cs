@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
             GetComponent<SpriteRenderer>().material.color = Color.white;
         else
             GetComponent<SpriteRenderer>().material.color = Color.grey;
+        cam.transform.position = transform.position + Vector3.back * 20;
         if (sliding)
         {
             if (canMove)
@@ -31,25 +32,25 @@ public class Movement : MonoBehaviour
                 {
                     GetComponent<Rigidbody2D>().velocity = Vector2.up * speed * 2f;
                     canMove = false;
-                    transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
                     GetComponent<Rigidbody2D>().velocity = Vector2.down * speed * 2f;
                     canMove = false;
-                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    transform.rotation = Quaternion.Euler(0f, 0f, 180f);
                 }   
                 if (Input.GetKey(KeyCode.D))
                 {
                     GetComponent<Rigidbody2D>().velocity = Vector2.right * speed * 2f;
                     canMove = false;
-                    transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+                    transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 }   
                 if (Input.GetKey(KeyCode.A))
                 {
                     GetComponent<Rigidbody2D>().velocity = Vector2.left * speed * 2f;
                     canMove = false;
-                    transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                    transform.rotation = Quaternion.Euler(0f, 0f, -90f);
                 }
             }
         }
@@ -68,16 +69,11 @@ public class Movement : MonoBehaviour
             if (Input.GetKey(KeyCode.Space))
             {
                 movement = Vector2.zero;
-                cam.fieldOfView = 100;
-            }
-            else
-            {
-                cam.fieldOfView = 45;
+        cam.transform.position = transform.position + Vector3.back * 50;
             }
 
             GetComponent<Rigidbody2D>().velocity = movement;
         }
-        cam.transform.position = transform.position + Vector3.back * 20;
     }
 
     void OnCollisionStay2D(Collision2D collision)
