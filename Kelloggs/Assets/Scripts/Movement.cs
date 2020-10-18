@@ -43,9 +43,6 @@ public class Movement : MonoBehaviour
                     canMove = false;
                 }
             }
-            else
-            {
-            }
         }
         else
         {

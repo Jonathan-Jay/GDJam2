@@ -28,7 +28,7 @@ public class Sensor : MonoBehaviour
 
             float percent = 1 - Mathf.Min(currentDistance, renderDistance) / renderDistance;
 
-            itemSensor.color = new Color(1f, 1f, 1f, transparency.Evaluate(percent));
+            itemSensor.color = new Color(Vector3.Lerp(Vector3.zero, Vector3.left), transparency.Evaluate(percent));
             //itemSensor.color.
         }
     }
