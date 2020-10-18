@@ -6,9 +6,9 @@ using UnityEngine.Tilemaps;
 public class Movement : MonoBehaviour
 {
     public Camera cam;
-    public float speed;
+    public float speed = 10;
     public bool sliding = true;
-    private bool canMove = true;
+    public bool canMove = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,22 +50,24 @@ public class Movement : MonoBehaviour
         else
         {
             canMove = true;
+            Vector2 movement = Vector2.zero;
             if (Input.GetKey(KeyCode.W))
             {
-                GetComponent<Rigidbody2D>().velocity = Vector2.up * speed;
+                movement += Vector2.up * speed;
             }
             if (Input.GetKey(KeyCode.S))
             {
-                GetComponent<Rigidbody2D>().velocity = Vector2.down * speed;
+                movement += Vector2.down * speed;
             }   
             if (Input.GetKey(KeyCode.D))
             {
-                GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+                movement += Vector2.right * speed;
             }   
             if (Input.GetKey(KeyCode.A))
             {
-                GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+                movement += Vector2.left * speed;
             }
+            GetComponent<Rigidbody2D>().velocity = movement;
         }
 
         if (canMove)

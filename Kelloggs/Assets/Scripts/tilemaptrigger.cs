@@ -19,12 +19,12 @@ public class tilemaptrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         player.GetComponent<Movement>().sliding = false;
     }
 
     void OnTriggerExit2D(Collider2D collision)
     {
         player.GetComponent<Movement>().sliding = true;
+        player.GetComponent<Movement>().canMove = false;
     }
 }
