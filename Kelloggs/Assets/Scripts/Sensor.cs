@@ -9,6 +9,7 @@ public class Sensor : MonoBehaviour
     public AnimationCurve transparency;
     public List<GameObject> lostItems;
     public SpriteRenderer itemSensor;
+    public GameObject timerText;
     public float renderDistance = 100;
     public float timeLimit = 60;
 
@@ -49,6 +50,7 @@ public class Sensor : MonoBehaviour
 
             itemSensor.transform.position = transform.position + Vector3.up * 5f;
             itemSensor.transform.rotation = Quaternion.AngleAxis(Random.Range(-1f, 1f) * timePercent * 45f, Vector3.back);
+            timerText.GetComponent<Text>().text = "Timer: " + (timeLimit - (int)time);
         }
     }
 
