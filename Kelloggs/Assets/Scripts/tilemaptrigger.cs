@@ -25,6 +25,6 @@ public class tilemaptrigger : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         player.GetComponent<Movement>().sliding = true;
-        player.GetComponent<Movement>().canMove = false;
+        player.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

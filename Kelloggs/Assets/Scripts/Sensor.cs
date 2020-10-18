@@ -28,8 +28,21 @@ public class Sensor : MonoBehaviour
 
             float percent = 1 - Mathf.Min(currentDistance, renderDistance) / renderDistance;
 
-            itemSensor.color = new Color(Vector3.Lerp(Vector3.zero, Vector3.left), transparency.Evaluate(percent));
+            Vector3 tempCol = Vector3.Lerp(Vector3.forward * 5f, Vector3.right * 5f, percent);
+
+            itemSensor.color = new Color(tempCol.x, tempCol.y, tempCol.z, transparency.Evaluate(percent));
             //itemSensor.color.
+
+            itemSensor.transform.position = transform.position + Vector3.up * 5f;
+        }
+    }
+
+    public void DeleteCurrentTest(GameObject collision)
+    {
+        if (collision == lostItems[currentIndex])
+        {
+            Destroy(lostItems[currentIndex]);
+            lostItems.RemoveAt(currentIndex--);
         }
     }
 }
