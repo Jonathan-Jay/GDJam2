@@ -4,7 +4,7 @@ using System.Collections.Generic;
 //using System.Numerics;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+public class MovementLeo : MonoBehaviour
 {
     public GameObject player;
 
@@ -12,10 +12,7 @@ public class Movement : MonoBehaviour
     float verticalInput = 0;
     public float moveSpeed = 10;
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+
         
     // Update is called once per frame
     void Update()
