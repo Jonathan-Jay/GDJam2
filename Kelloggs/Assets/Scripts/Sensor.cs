@@ -48,7 +48,7 @@ public class Sensor : MonoBehaviour
             //itemSensor.color.
 
             itemSensor.transform.position = transform.position + Vector3.up * 5f;
-            itemSensor.transform.rotation = Quaternion.AngleAxis(Random.Range(-1f, 1f) * timePercent * 45f, Vector3.back);
+            itemSensor.transform.rotation = Quaternion.AngleAxis(Random.Range(-1f, 1f) * transparency.Evaluate(timePercent) * 30f, Vector3.back);
         }
     }
 

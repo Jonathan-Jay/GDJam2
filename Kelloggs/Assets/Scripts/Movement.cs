@@ -20,9 +20,9 @@ public class Movement : MonoBehaviour
     void Update()
     {
         if (canMove)
-            GetComponent<MeshRenderer>().material.color = Color.green;
+            GetComponent<SpriteRenderer>().material.color = Color.white;
         else
-            GetComponent<MeshRenderer>().material.color = Color.red;
+            GetComponent<SpriteRenderer>().material.color = Color.grey;
         if (sliding)
         {
             if (canMove)
