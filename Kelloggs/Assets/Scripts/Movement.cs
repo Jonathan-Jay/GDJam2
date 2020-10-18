@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     public float speed = 10;
     public bool sliding = true;
     public bool canMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,46 +29,41 @@ public class Movement : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.W))
                 {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.up * speed;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.up * speed * 2f;
                     canMove = false;
+                    transform.rotation = Quaternion.Euler(0f, 0f, 180f);
                 }
                 if (Input.GetKey(KeyCode.S))
                 {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.down * speed;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.down * speed * 2f;
                     canMove = false;
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                 }   
                 if (Input.GetKey(KeyCode.D))
                 {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.right * speed;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.right * speed * 2f;
                     canMove = false;
+                    transform.rotation = Quaternion.Euler(0f, 0f, -90f);
                 }   
                 if (Input.GetKey(KeyCode.A))
                 {
-                    GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
+                    GetComponent<Rigidbody2D>().velocity = Vector2.left * speed * 2f;
                     canMove = false;
+                    transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 }
             }
         }
         else
         {
             canMove = true;
-            Vector2 movement = Vector2.zero;
-            if (Input.GetKey(KeyCode.W))
-            {
-                movement += Vector2.up * speed;
-            }
-            if (Input.GetKey(KeyCode.S))
-            {
-                movement += Vector2.down * speed;
-            }   
-            if (Input.GetKey(KeyCode.D))
-            {
-                movement += Vector2.right * speed;
-            }   
-            if (Input.GetKey(KeyCode.A))
-            {
-                movement += Vector2.left * speed;
-            }
+            float horizontalInput = Input.GetAxis("Horizontal");
+
+            float verticalInput = Input.GetAxis("Vertical");
+
+            Vector3 movement = new Vector3(horizontalInput, verticalInput, 0) * speed;
+
+            transform.rotation = Quaternion.Euler(0f, 0f, movement.x < 0 ? Vector2.Angle(movement, Vector2.up) : -Vector2.Angle(movement, Vector2.up));
+            //rotationFix * Quaternion.AngleAxis(movement.x < 0 ? -Vector2.Angle(movement, Vector2.up) : Vector2.Angle(movement, Vector2.up), Vector3.back);
 
             if (Input.GetKey(KeyCode.Space))
             {
@@ -92,29 +88,6 @@ public class Movement : MonoBehaviour
 
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
 
-        if (contactNormal.x == 0)
-        {
-            if (contactNormal.y > 0)
-            {
-                transform.position += Vector3.up * 0.05f;
-            }
-            else
-            {
-                transform.position += Vector3.down * 0.05f;
-            }
-        }
-        else
-        {
-            if (contactNormal.x > 0)
-            {
-                transform.position += Vector3.right * 0.05f;
-            }
-            else
-            {
-                transform.position += Vector3.left * 0.05f;
-            }
-
-        }
-
+        transform.position += contactNormal * 0.05f;
     }
 }
