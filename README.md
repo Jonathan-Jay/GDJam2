@@ -1,2 +1,2 @@
 # GDJam2
-while (!false);
+for  (int value(0) ; !false ; value = true * false);
